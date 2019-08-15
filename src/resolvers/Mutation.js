@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+const SECRET = "asdfas98df7";
 
 const Mutation = {
   register: async (parent, args, { models }) => {
@@ -22,7 +23,7 @@ const Mutation = {
       throw new Error("Cannot register");
     }
 
-    const token = jwt.sign({ _id: newUser._id }, "1231247");
+    const token = jwt.sign({ _id: newUser._id }, SECRET);
 
     return { token };
   },
@@ -56,7 +57,7 @@ const Mutation = {
       throw new Error("Wrong Password");
     }
 
-    const token = jwt.sign({ _id: User._id }, "asdasd");
+    const token = jwt.sign({ _id: User._id }, SECRET);
 
     return { token };
   },
@@ -75,7 +76,7 @@ const Mutation = {
       }
     }
 
-    const token = jwt.sign({ _id: User._id }, "asdasd");
+    const token = jwt.sign({ _id: User._id }, SECRET);
 
     return { token };
   }
