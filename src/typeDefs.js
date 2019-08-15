@@ -3,12 +3,13 @@ import { gql } from "apollo-server";
 const typeDefs = gql`
   type Query {
     users: [User]
+    getUser(token: String!): User
   }
 
   type Mutation {
     register(
       email: String!
-      password: String!
+      password: String
       name: String!
       isAdmin: Boolean
       social: String
@@ -22,7 +23,7 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     email: String!
-    password: String!
+    password: String
     isAdmin: Boolean!
     social: String
   }
