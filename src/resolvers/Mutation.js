@@ -79,6 +79,42 @@ const Mutation = {
     const token = jwt.sign({ _id: User._id }, SECRET);
 
     return { token };
+  },
+
+  createItem: async (parent, args, { models }) => {
+    const Item = await models.Item.findOne({ name: args.name });
+
+    if (Item) {
+      throw new Error("Please provide a unique name");
+    }
+
+    const newItem = new models.Item({
+      name: args.name,
+      container: args.container
+    });
+
+    try {
+      await newItem.save();
+    } catch (e) {
+      throw new Error("Cannot save item");
+    }
+
+    return newItem;
+  },
+  deleteItem: async (parent, args, { models }) => {
+    const Item = await models.Item.findOne({ _id: args._id });
+
+    if (!Item) {
+      throw new Error("Cannot find Item");
+    }
+
+    try {
+      await models.Item.deleteOne({ _id: args._id });
+    } catch (e) {
+      throw new Error("Cannot delete Item");
+    }
+
+    return true;
   }
 };
 

@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     getUser(token: String!): User
+    items: [Item]
   }
 
   type Mutation {
@@ -17,6 +18,9 @@ const typeDefs = gql`
     deleteAccount(_id: ID!): Boolean
     EmailLogin(email: String!, password: String!): Token
     GoogleLogin(email: String!): Token
+
+    createItem(name: String!, container: String!): Item
+    deleteItem(_id: ID!): Boolean
   }
 
   type User {
@@ -30,6 +34,12 @@ const typeDefs = gql`
 
   type Token {
     token: String!
+  }
+
+  type Item {
+    _id: ID!
+    name: String!
+    container: String!
   }
 `;
 

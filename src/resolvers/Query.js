@@ -17,6 +17,11 @@ const Query = {
     }
 
     return User;
+  },
+  items: async (parent, args, { models }) => {
+    const Items = await models.Item.find();
+
+    return Items;
   }
 };
 
