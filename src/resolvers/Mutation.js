@@ -61,7 +61,7 @@ const Mutation = {
 
     return { token };
   },
-  GoogleLogin: async (parent, args, { models }) => {
+  SocialLogin: async (parent, args, { models }) => {
     const User = await models.User.findOne({ email: args.email });
 
     if (!User) {
@@ -112,6 +112,32 @@ const Mutation = {
       await models.Item.deleteOne({ _id: args._id });
     } catch (e) {
       throw new Error("Cannot delete Item");
+    }
+
+    return true;
+  },
+  pushItemToFridge: async (parent, args, { models }) => {
+    const User = await models.User.findOne({ email: args.email });
+    const Item = await models.Item.findOne({ name: args.item });
+
+    if (!User) {
+      throw new Error("Cannot find User");
+    }
+
+    if (!Item) {
+      throw new Error("Cannot find Item");
+    }
+
+    User.fridge.some(item => {
+      if (item.name == Item.name) {
+        throw new Error("Already have one");
+      }
+    });
+
+    try {
+      await User.updateOne({ $push: { fridge: Item } });
+    } catch (e) {
+      throw new Error("Cannot Save Item");
     }
 
     return true;

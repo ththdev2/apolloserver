@@ -17,10 +17,12 @@ const typeDefs = gql`
     ): Token
     deleteAccount(_id: ID!): Boolean
     EmailLogin(email: String!, password: String!): Token
-    GoogleLogin(email: String!): Token
+    SocialLogin(email: String!): Token
 
     createItem(name: String!, container: String!): Item
     deleteItem(_id: ID!): Boolean
+
+    pushItemToFridge(item: String!, email: String!): Boolean
   }
 
   type User {
@@ -30,6 +32,7 @@ const typeDefs = gql`
     password: String
     isAdmin: Boolean!
     social: String
+    fridge: [Item]
   }
 
   type Token {
