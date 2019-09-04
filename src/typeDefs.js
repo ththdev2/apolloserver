@@ -1,10 +1,11 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   type Query {
     users: [User]
-    getUser(token: String!): User
     items: [Item]
+
+    verifyToken(token: String!): User
   }
 
   type Mutation {
@@ -16,8 +17,9 @@ const typeDefs = gql`
       social: String
     ): Token
     deleteAccount(_id: ID!): Boolean
-    EmailLogin(email: String!, password: String!): Token
-    SocialLogin(email: String!): Token
+
+    emailLogin(email: String!, password: String!): Token
+    socialLogin(email: String!): Token
 
     createItem(name: String!, container: String!): Item
     deleteItem(_id: ID!): Boolean
