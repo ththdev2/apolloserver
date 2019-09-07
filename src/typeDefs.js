@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from "apollo-server";
 
 const typeDefs = gql`
   type Query {
@@ -24,7 +24,8 @@ const typeDefs = gql`
     createItem(name: String!, container: String!): Item
     deleteItem(_id: ID!): Boolean
 
-    pushItemToFridge(item: String!, email: String!): Boolean
+    pushFridgeItem(item: String!, email: String!): Boolean
+    deleteFridgeItem(item: String!, email: String!): Boolean
   }
 
   type User {
