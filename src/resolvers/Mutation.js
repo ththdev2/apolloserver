@@ -13,6 +13,7 @@ const Mutation = {
       name: args.name,
       email: args.email,
       password: args.password,
+      photoUrl: args.photoUrl,
       isAdmin: args.isAdmin ? args.isAdmin : false,
       social: args.social
     });

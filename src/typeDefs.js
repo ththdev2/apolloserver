@@ -13,6 +13,7 @@ const typeDefs = gql`
       email: String!
       password: String
       name: String!
+      photoUrl: String
       isAdmin: Boolean
       social: String
     ): Token
@@ -33,6 +34,7 @@ const typeDefs = gql`
     name: String!
     email: String!
     password: String
+    photoUrl: String
     isAdmin: Boolean!
     social: String
     fridge: [Item]
