@@ -22,6 +22,15 @@ const Query = {
     }
 
     return User;
+  },
+  getFridge: async (parent, args, { models }) => {
+    const User = await models.User.findOne({ email: args.email });
+
+    if (!User) {
+      throw new Error('Cannot find User');
+    }
+
+    return User.fridge;
   }
 };
 

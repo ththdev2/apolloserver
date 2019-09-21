@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   type Query {
@@ -6,6 +6,7 @@ const typeDefs = gql`
     items: [Item]
 
     verifyToken(token: String!): User
+    getFridge(email: String!): [Item]
   }
 
   type Mutation {
