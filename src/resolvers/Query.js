@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
-const SECRET = 'asdfas98df7';
+const SECRET = "asdfas98df7";
 
 const Query = {
   users: async (parent, args, { models }) => {
@@ -18,7 +18,7 @@ const Query = {
     const User = await models.User.findOne({ _id: decoded._id });
 
     if (!User) {
-      throw new Error('Cannot find User');
+      throw new Error("Cannot find User");
     }
 
     return User;
@@ -27,10 +27,24 @@ const Query = {
     const User = await models.User.findOne({ email: args.email });
 
     if (!User) {
-      throw new Error('Cannot find User');
+      throw new Error("Cannot find User");
     }
 
     return User.fridge;
+  },
+  searchItemsByName: async (parent, args, { models }) => {
+    const Items = await models.Item.find();
+    const formattedQuery = args.input.toLowerCase();
+
+    if (args.input == "") {
+      return null;
+    }
+
+    const searchListings = Items.filter(item => {
+      return item.name.toLowerCase().indexOf(formattedQuery) > -1;
+    });
+
+    return searchListings;
   }
 };
 
