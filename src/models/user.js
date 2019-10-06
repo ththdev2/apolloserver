@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
+  birth: Date,
   password: String,
   photoUrl: String,
   isAdmin: Boolean,
-  social: String,
+  googleLink: Boolean,
   fridge: Array
 });
 

@@ -12,10 +12,11 @@ const Mutation = {
     const newUser = new models.User({
       name: args.name,
       email: args.email,
+      birth: args.birth,
       password: args.password,
-      photoUrl: args.photoUrl,
+      photoUrl: args.photoUrl ? args.photoUrl : "",
       isAdmin: args.isAdmin ? args.isAdmin : false,
-      social: args.social
+      googleLink: args.social ? args.social : false
     });
 
     try {
@@ -28,6 +29,7 @@ const Mutation = {
 
     return { token };
   },
+
   deleteAccount: async (parent, args, { models }) => {
     const User = await models.User.findOne({ _id: args._id });
 
@@ -43,7 +45,8 @@ const Mutation = {
 
     return true;
   },
-  emailLogin: async (parent, args, { models }) => {
+
+  SignIn: async (parent, args, { models }) => {
     const User = await models.User.findOne({ email: args.email });
 
     if (!User) {
@@ -62,7 +65,8 @@ const Mutation = {
 
     return { token };
   },
-  socialLogin: async (parent, args, { models }) => {
+
+  googleSignIn: async (parent, args, { models }) => {
     const User = await models.User.findOne({ email: args.email });
 
     if (!User) {

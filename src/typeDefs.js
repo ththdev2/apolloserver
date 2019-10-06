@@ -13,17 +13,18 @@ const typeDefs = gql`
 
   type Mutation {
     register(
+      name: String!
       email: String!
       password: String
-      name: String!
+      birth: Date!
       photoUrl: String
       isAdmin: Boolean
-      social: String
+      googleLink: String
     ): Token
     deleteAccount(_id: ID!): Boolean
 
-    emailLogin(email: String!, password: String!): Token
-    socialLogin(email: String!): Token
+    SignIn(email: String!, password: String!): Token
+    googleSignIn(email: String!): Token
 
     createItem(name: String!, container: String!): Item
     deleteItem(_id: ID!): Boolean
@@ -36,12 +37,15 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     email: String!
-    password: String
+    birth: Date!
+    password: String!
     photoUrl: String
     isAdmin: Boolean!
-    social: String
+    googleLink: Boolean!
     fridge: [Item]
   }
+
+  scalar Date
 
   type Token {
     token: String!
